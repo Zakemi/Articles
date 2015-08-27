@@ -1,0 +1,30 @@
+﻿@model Articles.Models.ArticlePageModel
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.ValidationSummary()
+
+
+@Html.Partial("_Search", Model)
+
+
+<h3>Items</h3>
+
+@{
+    var grid = new WebGrid(source: null, rowsPerPage: 4);
+    grid.Bind(Model.ItemList, rowCount: Model.ItemListCount, autoSortAndPage: false);
+}
+
+@grid.GetHtml(tableStyle:"table",
+
+    columns: grid.Columns
+    (
+        grid.Column("Number", header:"Cikkszám", format: item => string.Format("# {0}", item.Number)),
+        grid.Column("Name", header:"Név"),
+        grid.Column("Description", header:"Leírás"),
+        grid.Column("Price", header:"Ár", format: item => string.Format("{0} Forint", item.Price)),
+        grid.Column(header:"Törlés", format: (item) => Html.Raw(
+            string.Format("<a class='btn btn-danger' href="+@Url.Action("Delete", "Article", new { id = item.Id })+">X</a>")))
+    )
+)

@@ -1,0 +1,50 @@
+﻿@using MvcCheckBoxList.Model
+@model Articles.Models.ArticlePageModel
+
+<h3>Search</h3>
+
+@using (Html.BeginForm("Search", "Article", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>
+                <label>Select categories:</label>
+            </td>
+            <td>
+                <label>Fields:</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="tags-checkboxes">
+                <section class="checkBoxListFor">
+                    <p>
+                    <p>
+                        @Html.CheckBoxListFor(m => m.PostedCategories.CategoryId,
+                            m => m.AvailableCategories,
+                            category => category.Id,
+                            category => category.Name,
+                            m => m.SelectedCategories,
+                            Position.Horizontal)
+                    </p>
+                </section>
+            </td>
+            <td>                @Html.LabelFor(m => m.SearchNumber)
+            @Html.TextBoxFor(m => m.SearchNumber, new { @class = "form-control" })
+
+            @Html.LabelFor(m => m.SearchName)
+            @Html.TextBoxFor(m => m.SearchName, new { @class = "form-control" })
+
+            @Html.LabelFor(m => m.SearchMinPrice)
+            @Html.TextBoxFor(m => m.SearchMinPrice, new { @class = "form-control" })
+
+            @Html.LabelFor(m => m.SearchMaxPrice)
+            @Html.TextBoxFor(m => m.SearchMaxPrice, new { @class = "form-control" })
+
+            @Html.LabelFor(m => m.SearchDescription)
+            @Html.TextAreaFor(m => m.SearchDescription, new { @class = "form-control" })
+            </td>
+        </tr>
+    </table>
+    
+    <input type="submit" value="Search">
+}

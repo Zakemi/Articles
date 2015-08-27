@@ -1,0 +1,28 @@
+﻿@model Articles.Models.ArticlePageModel
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.ValidationSummary()
+
+@Html.Partial("_Search", Model)
+
+<h3>Items</h3>
+
+<div class="row">
+    @foreach (var Item in Model.ItemList)
+    {
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xs-6">
+            <div class="thumbnail">
+
+                <div class="caption">
+                    <h3>@Item.Name</h3>
+                    <p>Ár: @Item.Price Forint</p>
+                    <p>Cikkszám: @Item.Number</p>
+                    <p>@Item.Description</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
